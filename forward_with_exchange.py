@@ -26,11 +26,11 @@ def forward_emails(username, password, forward_to_address, email, mail_server):
 
             # Check if there is a subject, if not give it a value so the script does not crash
             if email_message.subject is None:
-                email_message.subject = "Deng mam (no subject)"
+                email_message.subject = "(no subject)"
 
             # Check if the email has a body, if not give it a value so the script does not crash
             if email_message.text_body is None:
-                email_message.text_body = "Deng mam (no textBody)"
+                email_message.text_body = "(no textBody)"
 
             # Create the forward email
             msg = Message(
@@ -43,7 +43,8 @@ def forward_emails(username, password, forward_to_address, email, mail_server):
             )
 
             
-            #Here we attach any attachments if there are attachments
+            # Here we attach any attachments if there are attachments
+            # Attention! Attachments are saved locally and will then be forwarded
             for attachment in email_message.attachments:
                 if isinstance(attachment, FileAttachment):
                     local_path = os.path.join('/tmp', attachment.name)
