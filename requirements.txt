@@ -1,0 +1,6 @@
+﻿exchangelib
+imaplib
+poplib
+email
+smtplib
+pytz
