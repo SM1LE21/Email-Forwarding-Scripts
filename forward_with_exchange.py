@@ -9,7 +9,7 @@ def forward_emails(username, password, forward_to_address, email):
     print("from: ", email ,"\nto: ", forward_to_address, "\n")
 
     # Connect to account1's inbox
-    # Use the mail server of your email address in the config part
+    # Use the mail server of your email adress in the config part
     credentials = Credentials(username=username, password=password)
     config = Configuration(server='mail.example.com', credentials=credentials)
     account = Account(primary_smtp_address=email, config=config, autodiscover=False, access_type=DELEGATE)
@@ -22,20 +22,37 @@ def forward_emails(username, password, forward_to_address, email):
 
         # Forward each unread email
         for email_message in unread_emails:
+           
+            # Check if there is a subject, if not give it a value so the script does not crash
+            if email_message.subject is None:
+                email_message.subject = "The original email had no subject."
+
+            # Check if the email has a body, if not give it a value so the script does not crash
+            if email_message.text_body is None:
+                email_message.text_body = "The original email had no text_body."
+
+            # Check if the email has attatchments
+            if email_message.attachments:
+                attachments_temp = email_message.attachments
+            else:
+                attachments_temp = []
+
             # Create the forward email
-            # Be aware: cases where no cc, no subject, ... is available the program might crash!
             msg = Message(
                 account=account,
                 subject=f'FW: {email_message.subject}',
                 body=email_message.text_body,
                 to_recipients=[forward_to_address],
-                cc_recipients=email_message.cc,
-                bcc_recipients=email_message.bcc,
-                attachments=email_message.attachments,
+                #cc_recipients=email_message.cc,
+                #bcc_recipients=email_message.bcc,
+                attachments=attachments_temp,
             )
+
             msg.send()
             email_message.is_read = True
             email_message.save()
+
+            print("________________\nemail forwarded\n_______________")
 
         print("Last refresh: ", datetime.now().strftime("%H:%M:%S"))
 
