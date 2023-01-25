@@ -13,7 +13,7 @@ This script uses the `poplib` library to log in to an email account that support
 # Usage 
 To use these scripts, you will need to replace the placeholders for `username`, `password`, and `forward_to_address` with the actual login credentials for your email account and the address you want to forward the emails to.
 
-You will also need to install the necessary libraries for each script, please refer to the `requirements.txt file for more details on the dependencies.
+You will also need to install the necessary libraries for each script, please refer to the `requirements.txt` file for more details on the dependencies.
 
 Please be aware that these scripts will be running indefinitely, you can use a tool like `screen` or `nohup` to keep the script running in the background.
 
