@@ -9,7 +9,7 @@ def forward_emails(username, password, forward_to_address, email):
     print("from: ", email ,"\nto: ", forward_to_address, "\n")
 
     # Connect to account1's inbox
-    # Use the mail server of your email adress in the config part
+    # Use the mail server of your email address in the config part
     credentials = Credentials(username=username, password=password)
     config = Configuration(server='mail.example.com', credentials=credentials)
     account = Account(primary_smtp_address=email, config=config, autodiscover=False, access_type=DELEGATE)
