@@ -17,7 +17,7 @@ def forward_emails(account_username, account_password, forward_to_address):
 
     print("Pop success\n")
 
-    # Connect to smtp server
+    # Connect to smtp server 
     smtp = smtplib.SMTP("smtp.gmail.com", 587)
     smtp.starttls()
     smtp.login(account_username, account_password)
