@@ -5,6 +5,7 @@ import smtplib
 import time
 from datetime import datetime
 
+#This script might not work as intended
 def forward_emails(account_username, account_password, forward_to_address):
 
     print("\nForwarding Script started\n")
